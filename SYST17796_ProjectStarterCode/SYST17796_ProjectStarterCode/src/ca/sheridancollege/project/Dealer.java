@@ -16,7 +16,7 @@ public class Dealer implements Serializable {
 
     // Determines if dealer has a blackjack
     public boolean isBlackjack() {
-        if (hand.calculateTotal() == 21) {
+        if (getHand().calculateTotal() == 21) {
             return true;
         } else {
             return false;
@@ -26,12 +26,12 @@ public class Dealer implements Serializable {
     // This automates the dealer's play
     public void dealerPlay(Deck deck) {
         System.out.println();
-        while (hand.calculateTotal() <= 16) {
-            System.out.println("Dealer has " + hand.calculateTotal() + " and hits");
-            hand.addCard(deck.nextCard());
+        while (getHand().calculateTotal() <= 16) {
+            System.out.println("Dealer has " + getHand().calculateTotal() + " and hits");
+            getHand().addCard(deck.nextCard());
             System.out.println("Dealer " + this.getHandString(true, false));
         }
-        if (hand.calculateTotal() > 21) {
+        if (getHand().calculateTotal() > 21) {
             System.out.println("Dealer busts. " + this.getHandString(true, false));
         } else {
             System.out.println("Dealer stands. " + this.getHandString(true, false));
@@ -40,29 +40,43 @@ public class Dealer implements Serializable {
 
     // Adds a card o the dealer's hand
     public void addCard(Card card) {
-        hand.addCard(card);
+        getHand().addCard(card);
 
     }
 
     // Gets the dealer's hand as a string
     public String getHandString(boolean isDealer, boolean hideHoleCard) {
-        String str = "Cards:" + hand.toString(isDealer, hideHoleCard);
+        String str = "Cards:" + getHand().toString(isDealer, hideHoleCard);
 
         return str;
     }
 
     // Calculates the dealer's hand total
     public int calculateTotal() {
-        return hand.calculateTotal();
+        return getHand().calculateTotal();
     }
 
     // Clears the dealer's hand
     public void clearHand() {
-        hand.clearHand();
+        getHand().clearHand();
     }
 
     // Peeks the dealer's face-down card
     public boolean peek() {
-        return hand.dealerPeek();
+        return getHand().dealerPeek();
+    }
+
+    /**
+     * @return the hand
+     */
+    public Hand getHand() {
+        return hand;
+    }
+
+    /**
+     * @param hand the hand to set
+     */
+    public void setHand(Hand hand) {
+        this.hand = hand;
     }
 }

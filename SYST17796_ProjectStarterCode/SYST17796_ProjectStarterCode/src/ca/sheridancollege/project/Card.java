@@ -17,6 +17,8 @@ import java.io.Serializable;
 public class Card implements Serializable // Serializable
 {
 
+    static Object Suit;
+
     /*Making data "private" is information hiding, so that it cannot be access by
 	 *someone else with code outside this class.*/
     private char suit;
